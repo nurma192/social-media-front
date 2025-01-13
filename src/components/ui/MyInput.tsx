@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Input as NextInput} from "@nextui-org/react";
 import {useController} from "react-hook-form";
 
@@ -18,7 +18,7 @@ type Props = {
     endContent?: JSX.Element;
 }
 
-const Input = ({name, label, placeholder, type, control, required, patternValue, patternErrorMessage = 'Invalid pattern', maxLength, maxLengthErrorMessage = 'Input text exceeds limit', minLength, minLengthErrorMessage='Input the text does`t reach the desired size', endContent, ...props}: Props) => {
+const MyInput = ({name, label, placeholder, type, control, required, patternValue, patternErrorMessage = 'Invalid pattern', maxLength, maxLengthErrorMessage = 'Input text exceeds limit', minLength, minLengthErrorMessage='Input the text does`t reach the desired size', endContent, ...props}: Props) => {
     const [rules, setRules] = useState({});
 
     useEffect(()=> {
@@ -81,4 +81,4 @@ const Input = ({name, label, placeholder, type, control, required, patternValue,
     );
 };
 
-export default Input;
+export default MyInput;

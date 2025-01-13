@@ -1,53 +1,47 @@
-import React, {useState} from 'react';
+import {Button, CircularProgress, Link} from "@nextui-org/react";
+import type {AuthType} from "../pages/AuthPage";
+import MyInput from "../components/ui/MyInput";
 import {useForm} from "react-hook-form";
-import Input from "../components/input";
-import {Button, Link} from "@nextui-org/react";
-import {Simulate} from "react-dom/test-utils";
-import {useLazyCurrentQuery, useLoginMutation} from "../app/services/userApi";
+import type {SubmitHandler} from "react-hook-form"
+import {useLoginMutation} from "../app/features/auth/authApi";
+import type {LoginRequest} from "../types/request/authRequests";
+import {setToken} from "../app/features/auth/authSlice";
+import ErrorMessage from "../components/ui/ErrorMessage";
+import {useAppDispatch} from "../app/hooks";
 import {useNavigate} from "react-router-dom";
-import ErrorMessage from "../components/error-message";
-import {hasErrorField} from "../app/utils/has-error-field";
-
+import MyButton from "../components/ui/MyButton";
 
 type Props = {
-    setSelected: (value: string) => void
-}
-type Login = {
-    email: string,
-    password: string,
+    setSelected: (value: AuthType) => void
 }
 
 const Login = ({setSelected}: Props) => {
-
-    const {
-        handleSubmit, control, formState: {errors, isValid},
-    } = useForm<Login>({
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch()
+    const {control, handleSubmit, formState: {isValid}} = useForm<LoginRequest>({
         mode: 'onChange',
-        reValidateMode: 'onBlur',
         defaultValues: {
-            email: '',
-            password: ''
+            email: "nurma192k@gmail.com",
+            password: "pass",
         }
-    });
-    const [login, {isLoading, data, }] = useLoginMutation({})
-    const navigate = useNavigate()
-    const [error, setError] = useState('')
-    const [triggerCurrentQuery] = useLazyCurrentQuery()
+    })
 
-    const onSubmit = async (loginData: Login) => {
-        try {
-            await login(loginData).unwrap()
-            console.log("data: ",data)
-            navigate('/')
-        } catch (error) {
-            if(hasErrorField(error)) {
-                setError(error.data.error)
-            }
+    const [login, {isLoading, isError, error}] = useLoginMutation()
+
+    const onSubmit: SubmitHandler<LoginRequest> = async (body) => {
+        console.log(body)
+
+        const result = await login(body)
+        console.log(result)
+        if (result.data && result.data.success) {
+            dispatch(setToken(result.data.token))
+            // navigate("/")
         }
     }
+
     return (
-        <form action="" className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-            <Input
+        <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
+            <MyInput
                 control={control}
                 name="email"
                 label="Email"
@@ -56,28 +50,33 @@ const Login = ({setSelected}: Props) => {
                 patternErrorMessage={"Напишите реальный email адрес!"}
                 required
             />
-            <Input
+
+            <MyInput
                 control={control}
                 name="password"
                 label="Пароль"
                 type="password"
-                minLength={8}
-                minLengthErrorMessage={"Минимальный размер 8"}
+                minLength={1}
+                minLengthErrorMessage={"Минимальный размер 1"}
                 required
             />
-            <ErrorMessage error={error} />
+            {isError && <ErrorMessage error={error}/>}
 
-            <p className="text-center text-small">
+
+            <p className="text-center text-small mt-3">
                 Нет аккаунта?{" "}
-                <Link size="sm" className="cursor-pointer" onPress={() => setSelected("sign-up")}>
+                <Link size="sm" className="cursor-pointer" onPress={() => setSelected("register")}>
                     Зарегистрируйтесь
                 </Link>
-
             </p>
-            <div className="flex gap-2 justify-end">
-                <Button fullWidth color="primary" type="submit" isLoading={isLoading} isDisabled={!isValid}>
+            <div className="w-full flex gap-2">
+                <MyButton fullWidth={true}
+                          color="primary"
+                          type="submit"
+                          isDisabled={!isValid}
+                          isLoading={isLoading}>
                     Войти
-                </Button>
+                </MyButton>
             </div>
         </form>
     );

@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 
 type ThemeContextType = {
     theme: "dark" | "light";
-
     toggleTheme: () => void;
 }
 

@@ -1,6 +1,6 @@
 import type React from 'react';
-import Button from "../button";
 import {Link} from "react-router-dom";
+import MyButton from "../ui/MyButton";
 
 type Props = {
     children: React.ReactNode;
@@ -10,11 +10,11 @@ type Props = {
 
 const NavButton = ({children, icon, href}: Props) => {
     return (
-        <Button className="flex justify-start text-xl" icon={icon}>
+        <MyButton className="flex justify-start text-xl" icon={icon}>
             <Link to={href} className="size-full flex items-center">
                 {children}
             </Link>
-        </Button>
+        </MyButton>
     );
 };
 

@@ -15,9 +15,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@nextui-org/react": "^2.4.8",
+    "@nextui-org/react": "^2.6.11",
     "@reduxjs/toolkit": "^2.0.1",
-    "framer-motion": "^11.5.4",
+    "framer-motion": "^11.17.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.53.0",
@@ -26,6 +26,7 @@
     "react-router-dom": "^6.26.2"
   },
   "devDependencies": {
+    "@nextui-org/theme": "^2.4.5",
     "@testing-library/dom": "^9.3.4",
     "@testing-library/jest-dom": "^6.2.0",
     "@testing-library/react": "^14.1.2",

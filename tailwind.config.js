@@ -1,17 +1,34 @@
+const {nextui} = require('@nextui-org/theme');
 /** @type {import('tailwindcss').Config} */
-const {nextui} = require("@nextui-org/react");
+module.exports = {
+	content: [
+		"./src/**/*.{js,jsx,ts,tsx}",
+		'./src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+		'./src/components/**/*.{js,ts,jsx,tsx,mdx}',
+		'./src/app/**/*.{js,ts,jsx,tsx,mdx}',
+		"./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+	],
+	theme: {
+		extend: {
+			fontFamily: {
+				'cera': ['"Cera Pro Regular"', 'sans-serif'],
+			},
+			colors: {
+				// primary: '#46A358',
+				secondary: '#fafafa',
+			},
+			screens: {
+				xs: '480px',
+				md: '768px',
+				xl: '1000px',
+				xl2: '1200px',
+			},
+		},
+	},
+	// darkMode: "class",
+	plugins: [nextui({
+		layout: {
 
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
-
-  ],
-  theme: {
-    extend: {},
-  },
-  darkMode: "class",
-  plugins: [nextui()],
-}
-
+		}
+	})],
+};

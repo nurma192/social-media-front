@@ -5,51 +5,11 @@ import App from "./App"
 import {store} from "./app/store"
 import "./index.css"
 import {NextUIProvider} from "@nextui-org/react";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {ThemeProvider} from "./components/vim-provider";
-import Auth from "./pages/auth";
-import Layouot from "./components/layout";
-import CurrentPost from "./pages/current-post";
-import UserProfile from "./pages/user-profile";
-import Followers from "./pages/followers";
-import Following from "./pages/following";
-import Posts from "./pages/posts";
+import {   } from '@nextui-org/react';
+
 
 const container = document.getElementById("root")
-
-const router = createBrowserRouter([
-    {
-        path: '/auth',
-        element: <Auth />
-    },
-    {
-        path: '/',
-        element: <Layouot />,
-        children: [
-            {
-                path: "",
-                element: <Posts />,
-            },
-            {
-                path: "posts/:id",
-                element: <CurrentPost />,
-            },
-            {
-                path: "users/:id",
-                element: <UserProfile />,
-            },
-            {
-                path: "followers",
-                element: <Followers />,
-            },
-            {
-                path: "following",
-                element: <Following />,
-            },
-
-        ]
-    },
-])
 
 if (container) {
     const root = createRoot(container)
@@ -59,7 +19,7 @@ if (container) {
             <Provider store={store}>
                 <NextUIProvider>
                     <ThemeProvider>
-                        <RouterProvider router={router}/>
+                        <App/>
                     </ThemeProvider>
                 </NextUIProvider>
             </Provider>
