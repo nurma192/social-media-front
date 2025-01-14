@@ -1,5 +1,10 @@
 import type {LoginResponse, RegisterResponse} from "../../../types/response/authResponses";
-import type {LoginRequest, RegisterRequest, VerifyAccountRequest} from "../../../types/request/authRequests";
+import {
+    LoginRequest,
+    RegisterRequest,
+    SendVerifyCodeRequest,
+    VerifyAccountRequest
+} from "../../../types/request/authRequests";
 import {api} from "../../services/api";
 import type { DefaultResponse} from "../../../types/response/DefaultResponse";
 
@@ -20,6 +25,13 @@ export const authApi = api.injectEndpoints({
                 body: body
             })
         }),
+        sendCode: build.mutation<DefaultResponse, SendVerifyCodeRequest>({
+            query: (body) => ({
+                url: "auth/send-verify-code",
+                method: "POST",
+                body: body
+            })
+        }),
         verifyAccount: build.mutation<DefaultResponse, VerifyAccountRequest>({
             query: (body) => ({
                 url: "auth/verify-account",
@@ -30,4 +42,4 @@ export const authApi = api.injectEndpoints({
     })
 })
 
-export const {useLoginMutation, useRegisterMutation, useVerifyAccountMutation} = authApi
+export const {useLoginMutation, useRegisterMutation, useVerifyAccountMutation, useSendCodeMutation} = authApi

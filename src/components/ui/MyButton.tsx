@@ -10,7 +10,8 @@ type Props = {
     type?: 'button' | 'submit' | 'reset',
     fullWidth?: boolean,
     color?: "primary" | "secondary" | "success" | "warning" | "danger" | undefined,
-    itemsColor?: "primary" | "secondary" | "success" | "warning" | "danger" | undefined,
+    loadingColor?: "primary" | "secondary" | "success" | "warning" | "danger" | undefined,
+    textStyle?: string,
     isDisabled?: boolean,
     isLoading?: boolean,
     size?: "sm" | "md" | "lg" | undefined;
@@ -26,14 +27,15 @@ const MyButton = ({
                       color,
                       isDisabled,
                       isLoading,
-                      itemsColor = "secondary",
+                      textStyle,
+                      loadingColor = "secondary",
                       size = "md"
                   }: Props) => {
     const [startContent, setStartContent] = useState(icon)
 
     useEffect(() => {
         if (isLoading) {
-            setStartContent(<CircularProgress size={'sm'} color={itemsColor} classNames={{svg: "w-6 h-6"}}/>)
+            setStartContent(<CircularProgress size={'sm'} color={loadingColor} classNames={{svg: "w-6 h-6"}}/>)
         } else {
             setStartContent(icon)
         }
@@ -50,7 +52,7 @@ const MyButton = ({
             isDisabled={isDisabled}
             fullWidth={fullWidth}
         >
-            {children}
+            <p className={textStyle}>{children}</p>
         </NextButton>
     );
 };

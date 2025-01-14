@@ -13,3 +13,6 @@ export type VerifyAccountRequest = {
     email: string,
     code: string,
 }
+export type SendVerifyCodeRequest = {
+    email: string
+}
