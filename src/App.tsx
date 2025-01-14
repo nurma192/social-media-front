@@ -6,6 +6,7 @@ import UserProfile from "./pages/UserProfilePage";
 import Followers from "./pages/FollowersPage";
 import Following from "./pages/FollowingPage";
 import Layout from "./components/layout/layout";
+import {Toaster} from "sonner";
 
 const router = createBrowserRouter([
     {
@@ -13,38 +14,38 @@ const router = createBrowserRouter([
         element: <Auth type={"login"}/>,
         children: [
             {
-                path:"login",
+                path: "login",
                 element: <Auth type={"login"}/>,
             },
             {
-                path:"register",
+                path: "register",
                 element: <Auth type={"register"}/>,
             }
         ]
     },
     {
         path: '/',
-        element: <Layout />,
+        element: <Layout/>,
         children: [
             {
                 path: "",
-                element: <Posts />,
+                element: <Posts/>,
             },
             {
                 path: "posts/:id",
-                element: <CurrentPost />,
+                element: <CurrentPost/>,
             },
             {
                 path: "users/:id",
-                element: <UserProfile />,
+                element: <UserProfile/>,
             },
             {
                 path: "followers",
-                element: <Followers />,
+                element: <Followers/>,
             },
             {
                 path: "following",
-                element: <Following />,
+                element: <Following/>,
             },
 
         ]
@@ -53,7 +54,14 @@ const router = createBrowserRouter([
 
 const App = () => {
     return (
-        <RouterProvider router={router}/>
+        <>
+            <RouterProvider
+                future={{
+                    v7_startTransition: true
+                }}
+                router={router}/>
+            <Toaster richColors={true}/>
+        </>
     )
 }
 
