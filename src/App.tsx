@@ -1,12 +1,11 @@
-
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import Layout from "./components/layout";
 import Auth from "./pages/AuthPage";
 import Posts from "./pages/PostsPage";
 import CurrentPost from "./pages/CurrectPostPage";
 import UserProfile from "./pages/UserProfilePage";
 import Followers from "./pages/FollowersPage";
 import Following from "./pages/FollowingPage";
+import Layout from "./components/layout/layout";
 
 const router = createBrowserRouter([
     {

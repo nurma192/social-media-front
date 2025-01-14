@@ -1,8 +1,7 @@
-import React from 'react';
-import Header from "../header";
 import {Outlet} from "react-router-dom";
-import Container from "../container";
-import NavBar from "../nav-bar";
+import Container from "../Container";
+import Header from "./header";
+import NavBar from "../nav-bar/navbar";
 
 const Layout = () => {
 

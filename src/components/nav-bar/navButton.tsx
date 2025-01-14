@@ -10,7 +10,7 @@ type Props = {
 
 const NavButton = ({children, icon, href}: Props) => {
     return (
-        <MyButton className="flex justify-start text-xl" icon={icon}>
+        <MyButton fullWidth={true} className="flex justify-start text-xl py-2 bg-transparent hover:bg-opacity-20 hover:bg-secondary" icon={icon}>
             <Link to={href} className="size-full flex items-center">
                 {children}
             </Link>
