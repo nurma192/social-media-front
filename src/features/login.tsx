@@ -5,7 +5,6 @@ import {useForm} from "react-hook-form";
 import type {SubmitHandler} from "react-hook-form"
 import {useLoginMutation} from "../app/features/auth/authApi";
 import type {LoginRequest} from "../types/request/authRequests";
-import {setToken} from "../app/features/auth/authSlice";
 import ErrorMessage from "../components/ui/ErrorMessage";
 import {useAppDispatch} from "../app/hooks";
 import {useNavigate} from "react-router-dom";
@@ -17,7 +16,6 @@ type Props = {
 
 const Login = ({setSelected}: Props) => {
     const navigate = useNavigate();
-    const dispatch = useAppDispatch()
     const {control, handleSubmit, formState: {isValid}} = useForm<LoginRequest>({
         mode: 'onChange',
         defaultValues: {
@@ -34,8 +32,7 @@ const Login = ({setSelected}: Props) => {
         const result = await login(body)
         console.log(result)
         if (result.data && result.data.success) {
-            dispatch(setToken(result.data.token))
-            // navigate("/")
+            navigate("/")
         }
     }
 

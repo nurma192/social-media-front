@@ -1,13 +1,13 @@
-import React from 'react';
-import {Navigate, Outlet, useNavigate} from "react-router-dom";
+import {Navigate, Outlet} from "react-router-dom";
 import {useAppSelector} from "../app/hooks";
-import type {RootState} from "../app/store";
+import {selectIsAuthenticated, selectUser} from "../app/features/userSlice";
+import {useEffect} from "react";
 
 function ProtectedRoute() {
-    const navigate = useNavigate();
-    const token = useAppSelector((state: RootState) => state.auth.token)
+    const isAuthenticated = useAppSelector(selectIsAuthenticated);
+    const user = useAppSelector(selectUser);
 
-    if (!token) {
+    if (!isAuthenticated) {
         return <Navigate to="/auth/login" replace/>
     }
 

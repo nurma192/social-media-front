@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {Card, CardBody, Tab, Tabs} from "@nextui-org/react";
 import Login from "../features/login";
 import Register from "../features/register";
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 export type AuthType = "login" | "register";
 

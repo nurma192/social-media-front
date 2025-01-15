@@ -1,7 +1,7 @@
 import type {Middleware, MiddlewareAPI} from "redux";
 import {isFulfilled, isRejectedWithValue} from "@reduxjs/toolkit";
 import {toast} from "sonner";
-import {messageCatch} from "../utils/messageCatch";
+import {messageCatch} from "../../utils/messageCatch";
 
 
 export const notificationMiddleware: Middleware =
