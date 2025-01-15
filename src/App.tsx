@@ -1,67 +1,41 @@
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, RouterProvider, Routes} from "react-router-dom";
+import {Toaster} from "sonner";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import Layout from "./components/layout/layout";
 import Auth from "./pages/AuthPage";
 import Posts from "./pages/PostsPage";
 import CurrentPost from "./pages/CurrectPostPage";
-import UserProfile from "./pages/UserProfilePage";
-import Followers from "./pages/FollowersPage";
-import Following from "./pages/FollowingPage";
-import Layout from "./components/layout/layout";
-import {Toaster} from "sonner";
+import UserProfilePage from "./pages/UserProfilePage";
+import FollowersPage from "./pages/FollowersPage";
+import FollowingPage from "./pages/FollowingPage";
 
-const router = createBrowserRouter([
-    {
-        path: '/auth',
-        element: <Auth type={"login"}/>,
-        children: [
-            {
-                path: "login",
-                element: <Auth type={"login"}/>,
-            },
-            {
-                path: "register",
-                element: <Auth type={"register"}/>,
-            }
-        ]
-    },
-    {
-        path: '/',
-        element: <Layout/>,
-        children: [
-            {
-                path: "",
-                element: <Posts/>,
-            },
-            {
-                path: "posts/:id",
-                element: <CurrentPost/>,
-            },
-            {
-                path: "users/:id",
-                element: <UserProfile/>,
-            },
-            {
-                path: "followers",
-                element: <Followers/>,
-            },
-            {
-                path: "following",
-                element: <Following/>,
-            },
-
-        ]
-    },
-])
 
 const App = () => {
     return (
-        <>
-            <RouterProvider
-                future={{
-                    v7_startTransition: true
-                }}
-                router={router}/>
-            <Toaster richColors={true}/>
-        </>
+        <BrowserRouter future={{
+            v7_startTransition: true,
+            v7_relativeSplatPath: true
+        }}>
+            <Routes>
+                <Route element={<ProtectedRoute/>}>
+                    <Route path="/" element={<Layout/>}>
+                        <Route index element={<Posts/>}/>
+                        <Route path="posts/:id" element={<CurrentPost/>}/>
+                        <Route path="users/:id" element={<UserProfilePage/>}/>
+                        <Route path="followers" element={<FollowersPage/>}/>
+                        <Route path="following" element={<FollowingPage/>}/>
+                        <Route path="support" element={<div>Support</div>}/>
+                    </Route>
+                </Route>
+
+                <Route path={"/auth"}>
+                    <Route index element={<Navigate to="login" replace />} />
+                    <Route path="login" element={<Auth type="login"/>}/>
+                    <Route path="register" element={<Auth type="register"/>}/>
+                </Route>
+            </Routes>
+            <Toaster richColors/>
+        </BrowserRouter>
     )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Followers = () => {
+const FollowersPage = () => {
     return (
         <div>
             Followers
@@ -8,4 +8,4 @@ const Followers = () => {
     );
 };
 
-export default Followers;
+export default FollowersPage;

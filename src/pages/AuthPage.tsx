@@ -2,6 +2,7 @@ import {useState} from 'react';
 import {Card, CardBody, Tab, Tabs} from "@nextui-org/react";
 import Login from "../features/login";
 import Register from "../features/register";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 export type AuthType = "login" | "register";
 
@@ -11,10 +12,12 @@ type Props = {
 
 const Auth = ({type}: Props) => {
     const [selected, setSelected] = useState<AuthType>(type);
+    const navigate = useNavigate();
 
     const handleOnSelectionChange = (type: string) => {
         if (type === "login" || type === "register") {
             setSelected(type);
+            navigate(`/auth/${type}`)
         }
     }
 
