@@ -1,8 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
-import type {RootState} from "../store";
-import {userApi} from "./user/userApi";
-import {authApi} from "./auth/authApi";
-import type {User} from "../../types/User";
+import type {RootState} from "../../store";
+import {userApi} from "./userApi";
+import {authApi} from "../auth/authApi";
+import type {User} from "../../../types/User";
 
 interface InitialState {
     user: User | null
@@ -14,18 +14,28 @@ interface InitialState {
 
 const initialState: InitialState = {
     user: null,
-    isAuthenticated: false,
+    isAuthenticated: !!localStorage.getItem("token"),
     users: [],
-    currentUser: null
+    currentUser: null,
+    token: localStorage.getItem("token") || undefined,
 }
 
 const slice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        logout: () => initialState,
+        logout: () => {
+            localStorage.removeItem("token")
+            return initialState
+        },
         resetUser: (state) => {
             state.user = null;
+        },
+        resetToken: (state, action) => {
+            console.log("resetTokenAction", action)
+            localStorage.setItem("token", action.payload.data.token)
+            state.token = action.payload.data.token
+            state.isAuthenticated = true
         }
     },
     extraReducers: builder => (
@@ -38,13 +48,18 @@ const slice = createSlice({
                 state.currentUser = action.payload.user
                 state.isAuthenticated = true
             })
+            .addMatcher(authApi.endpoints.refreshToken.matchFulfilled, (state, action) => {
+                localStorage.setItem("token", action.payload.token)
+                state.token = action.payload.token
+                state.isAuthenticated = true
+            })
             // .addMatcher(userApi.endpoints.getUserByID.matchFulfilled, (state, action) => {
             //     state.user = action.payload
             // })
     )
 })
 
-export const { logout, resetUser } = slice.actions
+export const { logout, resetUser, resetToken } = slice.actions
 export default slice.reducer
 
 export const selectIsAuthenticated = (state: RootState) => {

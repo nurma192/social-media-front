@@ -56,7 +56,7 @@ const Login = ({setSelected}: Props) => {
                 minLengthErrorMessage={"Минимальный размер 1"}
                 required
             />
-            {isLoginError&& <ErrorMessage error={loginError}/>}
+            {isLoginError && <ErrorMessage error={loginError}/>}
 
 
             <p className="text-center text-small mt-3">
