@@ -29,8 +29,8 @@ const Login = ({setSelected}: Props) => {
 
     const onSubmit: SubmitHandler<LoginRequest> = async (body) => {
         const result = await login(body)
-        await triggerCurrentUser()
         if (result.data && result.data.success) {
+            await triggerCurrentUser()
             navigate("/")
         }
     }

@@ -5,11 +5,12 @@ import NavBar from "../nav-bar/navbar";
 import {useAppSelector} from "../../app/hooks";
 import {selectCurrentUser} from "../../app/features/user/userSlice";
 import Profile from "../Profile";
+import {useCurrentUserQuery} from "../../app/features/user/userApi";
 
 const Layout = () => {
-
+    useCurrentUserQuery()
     const user = useAppSelector(selectCurrentUser)
-    console.log("user layout:",user)
+    // console.log("user layout:",user)
 
     return (
         <>

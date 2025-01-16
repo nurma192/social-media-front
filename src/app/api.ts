@@ -48,7 +48,7 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
             }
         } catch (error) {
             console.error("Error refreshing token:", error);
-            api.dispatch(logout()); // Если произошла ошибка - logout
+            api.dispatch(logout());
         }
     }
 

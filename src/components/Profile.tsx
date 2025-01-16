@@ -10,7 +10,7 @@ const Profile = () => {
         return null
     }
 
-    const {firstName, lastName, email, avatar_url, id} = currentUser
+    const {firstname, lastname, avatar_url, id, email, username} = currentUser
     return (
         <Card className="py-4 w-[302px]">
             <CardHeader className="pb-0 pt-2 px-4 flex-col items-center">
@@ -23,7 +23,7 @@ const Profile = () => {
             </CardHeader>
             <CardBody className="px-4">
                 <Link to={`user/${id}`}>
-                    <h4 className="font-bold text-large mb-2">{firstName} {lastName}</h4>
+                    <h4 className="font-bold text-large mb-2">{`${firstname} ${lastname} (@${username})`} </h4>
                     <p className="text-default flex items-center gap-2">
                         <span>{email}</span>
                     </p>

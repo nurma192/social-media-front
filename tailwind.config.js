@@ -14,7 +14,7 @@ module.exports = {
 				'cera': ['"Cera Pro Regular"', 'sans-serif'],
 			},
 			colors: {
-				// primary: '#46A358',
+				primary: '#006fee',
 				secondary: '#fafafa',
 				black: '#000000',
 			},
@@ -26,10 +26,6 @@ module.exports = {
 			},
 		},
 	},
-	// darkMode: "class",
-	plugins: [nextui({
-		layout: {
-
-		}
-	})],
+	darkMode: "class",
+	plugins: [nextui()],
 };
