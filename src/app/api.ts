@@ -1,7 +1,7 @@
 import {fetchBaseQuery, retry} from "@reduxjs/toolkit/query/react";
-import {BASE_URL} from "../../constants";
+import {BASE_URL} from "../constants";
 import {createApi} from "@reduxjs/toolkit/query/react";
-import type {RootState} from "../store";
+import type {RootState} from "./store";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: `${BASE_URL}/`,

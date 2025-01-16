@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useRef, useState} from 'react';
 import {Card, CardBody, Tab, Tabs} from "@nextui-org/react";
 import Login from "../features/login";
 import Register from "../features/register";
@@ -13,6 +13,7 @@ type Props = {
 const Auth = ({type}: Props) => {
     const [selected, setSelected] = useState<AuthType>(type);
     const navigate = useNavigate();
+
 
     const handleOnSelectionChange = (type: string) => {
         if (type === "login" || type === "register") {

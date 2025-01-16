@@ -1,5 +1,5 @@
 import {configureStore} from "@reduxjs/toolkit"
-import {api} from "./services/api";
+import {api} from "./api";
 import userSlice from "./features/userSlice";
 import {notificationMiddleware} from "./middleware/notificationMiddleware";
 import {loginMiddleware} from "./features/auth/authMiddleware";

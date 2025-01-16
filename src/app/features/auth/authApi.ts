@@ -5,7 +5,7 @@ import type {
     SendVerifyCodeRequest,
     VerifyAccountRequest
 } from "../../../types/request/authRequests";
-import {api} from "../../services/api";
+import {api} from "../../api";
 import type { DefaultResponse} from "../../../types/response/DefaultResponse";
 
 

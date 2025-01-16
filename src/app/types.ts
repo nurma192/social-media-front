@@ -1,4 +1,4 @@
-export type User = {
+type User = {
     id: string
     email: string
     password: string
@@ -17,7 +17,7 @@ export type User = {
     isFollowing?: boolean
 }
 
-export type Follows = {
+type Follows = {
     id: string
     follower: User
     followerId: string
@@ -25,7 +25,7 @@ export type Follows = {
     followingId: string
 }
 
-export type Post = {
+type Post = {
     id: string
     content: string
     author: User
@@ -37,7 +37,7 @@ export type Post = {
     updatedAt: Date
 }
 
-export type Like = {
+type Like = {
     id: string
     user: User
     userId: string

@@ -1,8 +1,9 @@
-import {api} from "../../services/api";
+import {api} from "../../api";
+import type {CurrentUserResponse} from "../../../types/response/userResponse";
 
 export const userApi = api.injectEndpoints({
     endpoints: build => ({
-        current: build.mutation({
+        currentUser: build.query<CurrentUserResponse,void>({
             query: body => ({
                 url: "user/current",
                 method: "GET",
@@ -10,3 +11,8 @@ export const userApi = api.injectEndpoints({
         })
     })
 })
+
+export const {
+    useLazyCurrentUserQuery,
+    useCurrentUserQuery
+} = userApi

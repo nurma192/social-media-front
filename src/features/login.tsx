@@ -1,4 +1,4 @@
-import {Button, CircularProgress, Link} from "@nextui-org/react";
+import {Link} from "@nextui-org/react";
 import type {AuthType} from "../pages/AuthPage";
 import MyInput from "../components/ui/MyInput";
 import {useForm} from "react-hook-form";
@@ -6,9 +6,9 @@ import type {SubmitHandler} from "react-hook-form"
 import {useLoginMutation} from "../app/features/auth/authApi";
 import type {LoginRequest} from "../types/request/authRequests";
 import ErrorMessage from "../components/ui/ErrorMessage";
-import {useAppDispatch} from "../app/hooks";
 import {useNavigate} from "react-router-dom";
 import MyButton from "../components/ui/MyButton";
+import {useLazyCurrentUserQuery} from "../app/features/user/userApi";
 
 type Props = {
     setSelected: (value: AuthType) => void
@@ -24,13 +24,12 @@ const Login = ({setSelected}: Props) => {
         }
     })
 
-    const [login, {isLoading, isError, error}] = useLoginMutation()
+    const [login, {isLoading: isLoginLoading, isError: isLoginError, error: loginError}] = useLoginMutation()
+    const [triggerCurrentUser] = useLazyCurrentUserQuery()
 
     const onSubmit: SubmitHandler<LoginRequest> = async (body) => {
-        console.log(body)
-
         const result = await login(body)
-        console.log(result)
+        await triggerCurrentUser()
         if (result.data && result.data.success) {
             navigate("/")
         }
@@ -57,7 +56,7 @@ const Login = ({setSelected}: Props) => {
                 minLengthErrorMessage={"Минимальный размер 1"}
                 required
             />
-            {isError && <ErrorMessage error={error}/>}
+            {isLoginError&& <ErrorMessage error={loginError}/>}
 
 
             <p className="text-center text-small mt-3">
@@ -71,7 +70,7 @@ const Login = ({setSelected}: Props) => {
                           color="primary"
                           type="submit"
                           isDisabled={!isValid}
-                          isLoading={isLoading}>
+                          isLoading={isLoginLoading}>
                     Войти
                 </MyButton>
             </div>

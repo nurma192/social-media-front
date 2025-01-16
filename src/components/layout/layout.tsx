@@ -5,14 +5,6 @@ import NavBar from "../nav-bar/navbar";
 
 const Layout = () => {
 
-    // useEffect(()=>{
-    //     console.log("user effect")
-    //     fetch("http://localhost:8092/posts/")
-    //         .then(res=>res.json())
-    //         .then(data => {
-    //             console.log(data);
-    //         }).catch(err => console.log(err));
-    // },[])
     return (
         <>
             <Header/>

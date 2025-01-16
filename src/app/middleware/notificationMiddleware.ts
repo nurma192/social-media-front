@@ -7,15 +7,17 @@ import {messageCatch} from "../../utils/messageCatch";
 export const notificationMiddleware: Middleware =
     (api: MiddlewareAPI) => (next) => (action) => {
         if (isFulfilled(action)) {
-            console.log("isFulfilled", messageCatch(action.payload, "Success"))
-            console.log("action:", action)
-            toast.success(messageCatch(action.payload, "Success"));
+            const message = messageCatch(action.payload)
+            if (message !== "") {
+                toast.success(message);
+            }
         }
 
         if (isRejectedWithValue(action)) {
-            console.log("isRejectedWithValue", messageCatch(action.payload, "Error"))
-            console.log("action:", action)
-            toast.error(messageCatch(action.payload, "Error"));
+            const message = messageCatch(action.payload)
+            if (message !== "") {
+                toast.error(message);
+            }
         }
         return next(action);
     }

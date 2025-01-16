@@ -1,7 +1,8 @@
-import type {User} from "../types";
 import {createSlice} from "@reduxjs/toolkit";
-import {userApi} from "../services/userApi";
 import type {RootState} from "../store";
+import {userApi} from "./user/userApi";
+import {authApi} from "./auth/authApi";
+import type {User} from "../../types/User";
 
 interface InitialState {
     user: User | null
@@ -29,17 +30,17 @@ const slice = createSlice({
     },
     extraReducers: builder => (
         builder
-            .addMatcher(userApi.endpoints.login.matchFulfilled, (state, action) => {
+            .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
                 state.token = action.payload.token
                 state.isAuthenticated = true
             })
-            .addMatcher(userApi.endpoints.current.matchFulfilled, (state, action) => {
-                state.currentUser = action.payload
+            .addMatcher(userApi.endpoints.currentUser.matchFulfilled, (state, action) => {
+                state.currentUser = action.payload.user
                 state.isAuthenticated = true
             })
-            .addMatcher(userApi.endpoints.getUserByID.matchFulfilled, (state, action) => {
-                state.user = action.payload
-            })
+            // .addMatcher(userApi.endpoints.getUserByID.matchFulfilled, (state, action) => {
+            //     state.user = action.payload
+            // })
     )
 })
 

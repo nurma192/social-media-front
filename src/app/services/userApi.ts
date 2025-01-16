@@ -1,7 +1,7 @@
-import {api} from "./api";
+import {api} from "../api";
 import type {User} from "../types";
 
-export const userApi = api.injectEndpoints({
+const userApi = api.injectEndpoints({
     endpoints: (builder) => ({
         login: builder.mutation<
             {token: string},
@@ -18,7 +18,7 @@ export const userApi = api.injectEndpoints({
             {email: string; password: string; name:string},
             {email: string; password: string; name:string}
         >({
-            query: (userData) => ({
+            query: userData => ({
                 url: '/auth/register',
                 method: "POST",
                 body: userData
@@ -45,17 +45,3 @@ export const userApi = api.injectEndpoints({
         })
     })
 })
-
-export const {
-    useRegisterMutation,
-    useLoginMutation,
-    useLazyCurrentQuery,
-    useCurrentQuery,
-    useGetUserByIDQuery,
-    useLazyGetUserByIDQuery,
-    useUpdateUserMutation,
-} = userApi;
-
-export const {
-    endpoints: {login, register, current, getUserByID, updateUser}
-} = userApi
