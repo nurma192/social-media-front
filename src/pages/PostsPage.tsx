@@ -1,18 +1,21 @@
-import React from 'react';
-import {useLazyCurrentUserQuery} from "../app/features/user/userApi";
+import {useGetAllPostsQuery} from "../app/features/post/postApi";
+import CreatePost from "../components/createPost";
 
 const Posts = () => {
-    const [currentQuery] = useLazyCurrentUserQuery()
-    const current = async () => {
-        const res = await currentQuery()
-        console.log(res)
-    }
-    return (
-        <div>
-            Posts
+    const {data, isSuccess, isLoading} = useGetAllPostsQuery()
 
-            <button onClick={current}>Current</button>
-        </div>
+    if (isSuccess && data) {
+        console.log(data)
+    }
+
+    return (
+        <>
+            <div className={`mb-10 w-full`}>
+                Posts
+
+                <CreatePost />
+            </div>
+        </>
     );
 };
 

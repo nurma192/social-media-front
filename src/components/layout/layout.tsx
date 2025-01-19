@@ -3,14 +3,13 @@ import Container from "../Container";
 import Header from "./header";
 import NavBar from "../nav-bar/navbar";
 import {useAppSelector} from "../../app/hooks";
-import {selectCurrentUser} from "../../app/features/user/userSlice";
+import {selectCurrentUser, selectUser} from "../../app/features/user/userSlice";
 import Profile from "../Profile";
 import {useCurrentUserQuery} from "../../app/features/user/userApi";
 
 const Layout = () => {
     useCurrentUserQuery()
-    const user = useAppSelector(selectCurrentUser)
-    // console.log("user layout:",user)
+    const user = useAppSelector(selectUser)
 
     return (
         <>
@@ -27,7 +26,7 @@ const Layout = () => {
                     </div>
                     <div className="flex-2 p-4">
                         <div className="flex-col.flex.gap-5">
-                            {user && <Profile />}
+                            {!user && <Profile />}
                         </div>
                     </div>
                 </>

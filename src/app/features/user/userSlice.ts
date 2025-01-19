@@ -12,7 +12,7 @@ interface InitialState {
     token?: string
 }
 
-const initialState: InitialState = {
+let initialState: InitialState = {
     user: null,
     isAuthenticated: !!localStorage.getItem("token"),
     users: [],
@@ -26,9 +26,11 @@ const slice = createSlice({
     reducers: {
         logout: () => {
             localStorage.removeItem("token")
-            initialState.isAuthenticated = false
-            initialState.token = undefined
-            return initialState
+            return {
+                ...initialState,
+                isAuthenticated: false,
+                token: undefined,
+            };
         },
         resetUser: (state) => {
             state.user = null;
@@ -71,5 +73,5 @@ export const selectCurrentUser = (state: RootState) => {
     return state.user.currentUser
 }
 export const selectUser = (state: RootState) => {
-    return state.user
+    return state.user.user
 }
