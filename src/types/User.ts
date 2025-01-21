@@ -11,3 +11,11 @@ export type User = {
     location?: string
     created_at?: string
 }
+
+export type UserMainInfo = {
+    id: string;
+    username: string;
+    firstname: string;
+    lastname: string;
+    avatar_url?: string;
+}

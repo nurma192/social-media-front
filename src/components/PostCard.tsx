@@ -1,16 +1,21 @@
 import {Card, Avatar} from "@nextui-org/react";
-import type {Post} from "../types/Post";
+import {Link} from "react-router-dom";
+import type {PostWithUser} from "../types/Post";
 import ImageSlider from "./ImageSlider";
 
 type Props = {
-    post: Post,
+    post: PostWithUser,
 }
-function PostCard({post}:Props) {
+
+function PostCard({post}: Props) {
     return (
-        <Card className="p-3 rounded-md">
-            <Avatar name={post.user_id} />
-            <ImageSlider images={post.images} />
-            <p className={"text-xl mt-3"}>{post.content_text}</p>
+        <Card className="flex flex-col items-start gap-3 p-3 rounded-md">
+            <Link to={`users/${post.id}`} className={`flex gap-2 items-center justify-start `}>
+                <Avatar src={post.user.avatar_url} name={post.user.id}/>
+                <h2 className={`font-bold`}>{post.user.username}</h2>
+            </Link>
+            <ImageSlider images={post.images}/>
+            <p className={"text-md"}>{post.content_text}</p>
             <div className="flex gap-2">
                 <a href="#" className={`underline`}>like</a>
                 <a href="#" className={`underline`}>comment</a>
