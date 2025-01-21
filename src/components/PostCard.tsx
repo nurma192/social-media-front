@@ -10,7 +10,7 @@ type Props = {
 function PostCard({post}: Props) {
     return (
         <Card className="flex flex-col items-start gap-3 p-3 rounded-md">
-            <Link to={`users/${post.id}`} className={`flex gap-2 items-center justify-start `}>
+            <Link to={`user/${post.id}`} className={`flex gap-2 items-center justify-start `}>
                 <Avatar src={post.user.avatar_url} name={post.user.id}/>
                 <h2 className={`font-bold`}>{post.user.username}</h2>
             </Link>
