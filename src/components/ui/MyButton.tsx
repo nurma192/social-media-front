@@ -3,11 +3,11 @@ import type React from 'react';
 import {Button as NextButton, CircularProgress} from "@nextui-org/react";
 
 type Props = {
-    children: React.ReactNode,
+    children?: React.ReactNode,
     icon?: JSX.Element | undefined,
     className?: string,
     onClick?: () => void,
-    type?: 'button' | 'submit' | 'reset',
+    type?: 'button' | 'submit' | 'reset' | undefined,
     fullWidth?: boolean,
     color?: "primary" | "secondary" | "success" | "warning" | "danger" | undefined,
     loadingColor?: "primary" | "secondary" | "success" | "warning" | "danger" | undefined,

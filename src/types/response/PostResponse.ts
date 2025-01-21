@@ -6,3 +6,8 @@ export type GetAllPostsResponse = {
     limit: number,
     posts: Post[]
 }
+
+export type GetPostsResponse = {
+    success: boolean,
+    posts: Post[]
+}

@@ -8,6 +8,7 @@ import {logout, selectIsAuthenticated} from "../../app/features/user/userSlice";
 import {useNavigate} from "react-router-dom";
 import {Button} from "@nextui-org/react"
 import { CiLogout } from "react-icons/ci";
+import Container from "../Container";
 
 const Header = () => {
     const {theme, toggleTheme} = useContext(ThemeContext)
@@ -20,34 +21,40 @@ const Header = () => {
         navigate("/auth/login")
     }
     return (
-        <Navbar>
-            <NavbarBrand>
-                <p className="font-bold text-inherit">Network Social</p>
-            </NavbarBrand>
-            <NavbarContent justify="end">
-                <NavbarItem
-                    className="lg:flex text-3xl cursor-pointer"
-                    onClick={() => toggleTheme()}
-                >
-                    {theme === 'light' ? <FaRegMoon/> : <LuSunMedium/>}
-                </NavbarItem>
-                <NavbarItem>
-                    {
-                        isAuthenticated && (
-                            <Button
-                                color={"default"}
-                                variant={"flat"}
-                                className={`gap-2`}
-                                onPress={handleLogout}
-                            >
-                                <CiLogout />
-                                Выйти
-                            </Button>
-                        )
-                    }
-                </NavbarItem>
-            </NavbarContent>
-        </Navbar>
+        <Container>
+            <Navbar className="w-full max-w-none"
+                    classNames={{
+                        wrapper: "w-full max-w-none"
+                    }}
+            >
+                <NavbarBrand>
+                    <p className="font-bold text-inherit">Network Social</p>
+                </NavbarBrand>
+                <NavbarContent justify="end">
+                    <NavbarItem
+                        className="lg:flex text-3xl cursor-pointer"
+                        onClick={() => toggleTheme()}
+                    >
+                        {theme === 'light' ? <FaRegMoon/> : <LuSunMedium/>}
+                    </NavbarItem>
+                    <NavbarItem>
+                        {
+                            isAuthenticated && (
+                                <Button
+                                    color={"default"}
+                                    variant={"flat"}
+                                    className={`gap-2`}
+                                    onPress={handleLogout}
+                                >
+                                    <CiLogout />
+                                    Выйти
+                                </Button>
+                            )
+                        }
+                    </NavbarItem>
+                </NavbarContent>
+            </Navbar>
+        </Container>
     );
 };
 

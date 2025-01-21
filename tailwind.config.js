@@ -22,7 +22,7 @@ module.exports = {
 				xs: '480px',
 				md: '768px',
 				xl: '1000px',
-				xl2: '1200px',
+				"2xl": '1200px',
 			},
 		},
 	},
