@@ -15,7 +15,7 @@ const Posts = () => {
             <CreatePost/>
             {isLoading && <div className={`flex justify-center items-center w-full`}>
 	            <div className={`flex w-full flex-col gap-3 mt-5`}>
-                    {Array.from({length:4},(post) => (
+                    {Array.from({length:4},() => (
                         <Card className={"flex flex-col gap-3 rounded-md p-3"}>
                             <Skeleton className="flex flex-col w-[300px] h-[40px] items-start gap-3 p-3 rounded-md">
                             </Skeleton>

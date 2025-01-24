@@ -9,10 +9,13 @@ export type Post = {
     created_at: string
 };
 
-export type PostWithUser = {
+export type PostWithAllInfo = {
     id: string,
     user: UserMainInfo,
-    content_text: string
-    images: Image[]
+    content_text: string,
+    liked_by_user: boolean,
+    likes_count: number,
+    comments_count: number,
+    images: Image[],
     created_at: string
 }

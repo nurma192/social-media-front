@@ -4,7 +4,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import Layout from "./components/layout/layout";
 import Auth from "./pages/AuthPage";
 import Posts from "./pages/PostsPage";
-import CurrentPost from "./pages/CurrectPostPage";
+import CurrentPost from "./pages/CurrentPostPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import FollowersPage from "./pages/FollowersPage";
 import FollowingPage from "./pages/FollowingPage";
