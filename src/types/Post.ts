@@ -10,7 +10,7 @@ export type Post = {
 };
 
 export type PostWithAllInfo = {
-    id: string,
+    id: number,
     user: UserMainInfo,
     content_text: string,
     liked_by_user: boolean,
