@@ -35,14 +35,15 @@ const CreatePost = () => {
     }
 
     useEffect(() => {
-        if (isSuccess) { // проверяем изменения состояния isSuccess
+        if (isSuccess) {
             setImages([]);
             setImagePreviews([]);
             reset({
                 contentText: ""
             });
+            triggerGetAllPosts()
         }
-    }, [isSuccess]); // срабатывает, когда isSuccess обновляется
+    }, [isSuccess]);
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {

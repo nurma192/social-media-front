@@ -1,21 +1,26 @@
-import {useGetAllPostsQuery} from "../app/features/post/postApi";
+import {useLazyGetAllPostsQuery} from "../app/features/post/postApi";
 import CreatePost from "../components/createPost";
 import PostCard from "../components/PostCard";
-import { Skeleton, Card } from "@nextui-org/react";
+import {Skeleton, Card} from "@nextui-org/react";
+import {useEffect} from "react";
 
 const Posts = () => {
-    const {data, isSuccess, isLoading} = useGetAllPostsQuery()
+    const [getAllPosts, {data, isSuccess, isLoading}] = useLazyGetAllPostsQuery()
 
     if (isSuccess && data) {
         console.log(data)
     }
 
+    useEffect( ()  => {
+        getAllPosts();
+    }, []);
+
     return (
         <>
             <CreatePost/>
             {isLoading && <div className={`flex justify-center items-center w-full`}>
-	            <div className={`flex w-full flex-col gap-3 mt-5`}>
-                    {Array.from({length:4},() => (
+				<div className={`flex w-full flex-col gap-3 mt-5`}>
+                    {Array.from({length: 4}, () => (
                         <Card className={"flex flex-col gap-3 rounded-md p-3"}>
                             <Skeleton className="flex flex-col w-[300px] h-[40px] items-start gap-3 p-3 rounded-md">
                             </Skeleton>
@@ -31,13 +36,13 @@ const Posts = () => {
                             </div>
                         </Card>
                     ))}
-	            </div>
-            </div>}
+				</div>
+			</div>}
             {isSuccess && data && <div className={`flex flex-col gap-3 mt-5`}>
                 {data.posts.map((post) => (
                     <PostCard key={post.id} post={post}/>
                 ))}
-            </div>}
+			</div>}
         </>
     );
 };

@@ -9,12 +9,14 @@ export const postApi = api.injectEndpoints({
                 query: body => ({
                     url: "posts",
                     method: "GET",
+                    // providesTags: () => [{type: 'Posts', id: 'LIST'}],
                 })
             }),
             getPostById: build.query<GetPostsResponse, string>({
                 query: body => ({
                     url: `posts/${body}`,
                     method: "GET",
+                    // providesTags: () => [{type: 'Post', id: 'POST'}],
                 })
             }),
             createPost: build.mutation<DefaultResponse, CreatePostRequest>({

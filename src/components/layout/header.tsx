@@ -9,6 +9,7 @@ import {useNavigate} from "react-router-dom";
 import {Button} from "@nextui-org/react"
 import { CiLogout } from "react-icons/ci";
 import Container from "../Container";
+import {api} from "../../app/api";
 
 const Header = () => {
     const {theme, toggleTheme} = useContext(ThemeContext)
@@ -19,6 +20,7 @@ const Header = () => {
     const handleLogout = () => {
         dispatch(logout())
         navigate("/auth/login")
+        dispatch(api.util.resetApiState())
     }
     return (
         <Container>

@@ -4,7 +4,7 @@ import {type PostWithAllInfo} from "../types/Post";
 import ImageSlider from "./ImageSlider";
 import { GoHeartFill } from "react-icons/go";
 import { FaRegCommentDots } from "react-icons/fa";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {useLikePostMutation, useUnlikePostMutation} from "../app/features/like/likeApi";
 
 type Props = {
@@ -38,6 +38,7 @@ function PostCard({post}: Props) {
             setLikeCount(likeCount + 1)
         }
     }
+
     return (
         <Card className="flex flex-col items-start gap-3 p-3 rounded-md">
             <Link to={`user/${post.user.id}`} className={`flex gap-2 items-center justify-start `}>
