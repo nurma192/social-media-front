@@ -1,5 +1,7 @@
+import {type PostWithAllInfo} from "../Post";
+
 export type DefaultResponse = {
     message: string;
-    detail: string;
+    post: PostWithAllInfo
     success: string
 }

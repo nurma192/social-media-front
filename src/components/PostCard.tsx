@@ -20,7 +20,7 @@ function PostCard({post}: Props) {
     const [unlikePost] = useUnlikePostMutation()
 
     const handleOnCommentClick = () => {
-        if(post.comments_count === 0) return
+        // if(post.comments_count === 0) return
         navigate("/posts/" + post.id)
     }
 

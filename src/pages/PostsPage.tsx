@@ -58,7 +58,7 @@ const Posts = () => {
 
     return (
         <>
-            <CreatePost/>
+            <CreatePost posts={posts} setPosts={setPosts}/>
 
             <div className={`flex flex-col gap-3 mt-5`}>
                 {posts.map((post) => (

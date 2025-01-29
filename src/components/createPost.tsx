@@ -1,32 +1,36 @@
-import {useCreatePostMutation, useLazyGetAllPostsQuery} from "../app/features/post/postApi";
+import {useCreatePostMutation} from "../app/features/post/postApi";
 import {type SubmitHandler, useForm} from "react-hook-form";
 import MyTextarea from "./ui/MyTextarea";
 import MyButton from "./ui/MyButton";
 import {IoSendSharp} from "react-icons/io5";
-import {MdFileOpen} from "react-icons/md";
 import {useEffect, useState} from "react";
 import ImageSlider from "./ImageSlider";
-import {isFulfilled, isRejectedWithValue} from "@reduxjs/toolkit";
 import MyCircularProgress from "./ui/MyCircularProgress";
-import {Image} from "../types/Image";
+import {type Image} from "../types/Image";
+import {type PostWithAllInfo} from "../types/Post";
+import {useAppSelector} from "../app/hooks";
+import {selectCurrentUser} from "../app/features/user/userSlice";
 
 type CreatePostForm = {
     contentText: string;
 }
+type Props = {
+    posts: PostWithAllInfo[];
+    setPosts: (posts: PostWithAllInfo[]) => void;
+}
 
-const CreatePost = () => {
+const CreatePost = ({posts, setPosts}: Props) => {
     const [images, setImages] = useState<File[]>([]);
     const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
-    const [createPost, {isSuccess, isLoading}] = useCreatePostMutation()
-    const [triggerGetAllPosts] = useLazyGetAllPostsQuery()
-
+    const [createPost, {data, isSuccess, isLoading}] = useCreatePostMutation()
 
     const {handleSubmit, control, reset} = useForm<CreatePostForm>()
+    const currentUser = useAppSelector(selectCurrentUser);
 
     const handleCreatePostSubmit: SubmitHandler<CreatePostForm> = async (data) => {
-        console.log(data)
-        console.log(images)
+        // console.log(data)
+        // console.log(images)
 
         await createPost({
             contentText: data.contentText,
@@ -35,15 +39,41 @@ const CreatePost = () => {
     }
 
     useEffect(() => {
-        if (isSuccess) {
+        if (!currentUser) {
+            return
+        }
+        if (isSuccess && data) {
             setImages([]);
             setImagePreviews([]);
             reset({
                 contentText: ""
             });
-            triggerGetAllPosts()
+
+            setPosts([
+                {
+                    id: data.post.id,
+                    user: {
+                        id: currentUser.id,
+                        username: currentUser.username,
+                        firstname: currentUser.firstname,
+                        lastname: currentUser.lastname,
+                        avatar_url: currentUser.avatar_url,
+                    },
+                    content_text: data.post.content_text,
+                    liked_by_user: data.post.liked_by_user,
+                    likes_count: data.post.likes_count,
+                    comments_count: data.post.comments_count,
+                    images: imagePreviews.map((image, index) => ({id:index, url: image})),
+                    created_at: data.post.created_at,
+                },
+                ...posts
+            ]);
         }
     }, [isSuccess]);
+
+    if (!currentUser) {
+        return null
+    }
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
@@ -70,8 +100,8 @@ const CreatePost = () => {
                 <>
                     <ImageSlider images={imagePreviews.map((image, index): Image => {
                         return {
-                            id: index+"",
-                            url:image,
+                            id: index,
+                            url: image,
                         }
                     })}/>
                     <div className="flex gap-2">
@@ -116,7 +146,8 @@ const CreatePost = () => {
                                   className={`flex justify-center items-center min-w-3 p-0 m-0 w-16 h-full rounded`}
                                   type="submit"
                         >
-                            {isLoading ? <MyCircularProgress size={"sm"} color={"secondary"} /> : <IoSendSharp className={"m-0 p-0 text-md "}/>}
+                            {isLoading ? <MyCircularProgress size={"sm"} color={"secondary"}/> :
+                                <IoSendSharp className={"m-0 p-0 text-md "}/>}
                         </MyButton>
                     </div>
                 </div>
