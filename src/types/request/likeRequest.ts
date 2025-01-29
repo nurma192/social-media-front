@@ -1,7 +1,7 @@
 export type LikePostRequest = {
-    post_id: number
+    postId: number
 }
 
 export type UnlikePostRequest = {
-    post_id: number
+    postId: number
 }

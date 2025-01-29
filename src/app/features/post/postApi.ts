@@ -1,16 +1,20 @@
 import {api} from "../../api";
 import type {GetAllPostsResponse, GetPostsResponse} from "../../../types/response/PostResponse";
-import type {CreatePostRequest, UpdatePostRequest} from "../../../types/request/postRequest";
+import type {CreatePostRequest, GetAllPostsRequest, UpdatePostRequest} from "../../../types/request/postRequest";
 import type {DefaultResponse} from "../../../types/response/DefaultResponse";
 
 export const postApi = api.injectEndpoints({
         endpoints: build => ({
-            getAllPosts: build.query<GetAllPostsResponse, void>({
-                query: body => ({
-                    url: "posts",
-                    method: "GET",
-                    // providesTags: () => [{type: 'Posts', id: 'LIST'}],
-                })
+            getAllPosts: build.query<GetAllPostsResponse, GetAllPostsRequest | void>({
+                query: body => {
+                    const limit = body?.limit ?? 10
+                    const page = body?.page ?? 1
+
+                    return {
+                        url: `posts?page=${page}&limit=${limit}`,
+                        method: "GET",
+                    }
+                }
             }),
             getPostById: build.query<GetPostsResponse, string>({
                 query: body => ({

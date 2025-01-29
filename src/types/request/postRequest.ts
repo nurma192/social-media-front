@@ -9,3 +9,8 @@ export type UpdatePostRequest = {
     deletedImagesId?: string[]
     newImages?: File[]
 }
+
+export type GetAllPostsRequest = {
+    limit?: number,
+    page?: number,
+}

@@ -18,6 +18,7 @@ function PostCard({post}: Props) {
 
     const [likePost] = useLikePostMutation()
     const [unlikePost] = useUnlikePostMutation()
+
     const handleOnCommentClick = () => {
         if(post.comments_count === 0) return
         navigate("/posts/" + post.id)
@@ -26,13 +27,13 @@ function PostCard({post}: Props) {
     const handleOnLikeClick = () => {
         if(liked) {
             unlikePost({
-                post_id: post.id,
+                postId: post.id,
             })
             setLiked(false)
             setLikeCount(likeCount - 1)
         }else {
             likePost({
-                post_id: post.id,
+                postId: post.id,
             })
             setLiked(true)
             setLikeCount(likeCount + 1)

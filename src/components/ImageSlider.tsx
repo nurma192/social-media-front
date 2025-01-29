@@ -1,23 +1,21 @@
-import React, {useEffect, useRef} from 'react';
 import {HiChevronLeft, HiChevronRight} from "react-icons/hi";
 import type {Image} from "../types/Image";
+import {Image as NextUiImage} from "@nextui-org/react"
+import {useEffect, useRef, useState} from "react";
 
 interface Props {
     images: Image[] | null
 }
 
 function ImageSlider({images}: Props) {
-    if (!images) {
-        return null;
-    }
-    const [mainImageId, setMainImageId] = React.useState(0);
+    const [mainImageId, setMainImageId] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLElement | HTMLButtonElement>) => {
-        if (event.key === "ArrowLeft" && mainImageId > 0) {
+        if (!!images && event.key === "ArrowLeft" && mainImageId > 0) {
             setMainImageId(prevState => prevState - 1);
         }
-        if (event.key === "ArrowRight" && mainImageId < images.length - 1) {
+        if (!!images && event.key === "ArrowRight" && mainImageId < images.length - 1) {
             setMainImageId(prevState => prevState + 1);
         }
     };
@@ -32,6 +30,10 @@ function ImageSlider({images}: Props) {
             });
         }
     }, [mainImageId]);
+    
+    if (!images) {
+        return null;
+    }
 
     return (
         <div
@@ -53,7 +55,7 @@ function ImageSlider({images}: Props) {
                 <div className="flex items-center overflow-hidden" ref={containerRef}>
                     {images.map((image, index) => (
                         <div key={index} className="flex-shrink-0 w-full">
-                            <img className='w-full h-full object-scale-down rounded'
+                            <NextUiImage className='w-full h-full object-scale-down rounded'
                                  src={`${image.url}`}
                                  alt="addPhoto-scelet.svg"/>
                         </div>
