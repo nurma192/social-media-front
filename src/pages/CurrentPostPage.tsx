@@ -1,6 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useGetPostByIdQuery} from "../app/features/post/postApi";
 import PostCard from "../components/PostCard";
+import PostComments from "../components/PostComments";
 
 const CurrentPost = () => {
     const navigate = useNavigate()
@@ -17,9 +18,12 @@ const CurrentPost = () => {
     }
 
     return (
-        <div>
+        <div className="flex flex-col gap-3">
             {isSuccess && (
-                <PostCard post={data.post}/>
+                <>
+                    <PostCard post={data.post}/>
+                    <PostComments postId={data.post.id}/>
+                </>
             )}
         </div>
     );

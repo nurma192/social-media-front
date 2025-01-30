@@ -1,5 +1,5 @@
 import {Card, Avatar} from "@nextui-org/react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useLocation} from "react-router-dom";
 import {type PostWithAllInfo} from "../types/Post";
 import ImageSlider from "./ImageSlider";
 import { GoHeartFill } from "react-icons/go";
@@ -15,11 +15,15 @@ function PostCard({post}: Props) {
     const [liked, setLiked] = useState(post.liked_by_user);
     const [likeCount, setLikeCount] = useState(post.likes_count)
     const navigate = useNavigate()
+    const location = useLocation();
 
     const [likePost] = useLikePostMutation()
     const [unlikePost] = useUnlikePostMutation()
 
     const handleOnCommentClick = () => {
+        if (location.pathname === `/posts/${post.id}`) {
+            return
+        }
         // if(post.comments_count === 0) return
         navigate("/posts/" + post.id)
     }

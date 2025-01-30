@@ -2,5 +2,8 @@ import {type CommentWithUser} from "../Comment";
 
 export type GetPostCommentsResponse = {
     comments: CommentWithUser[],
-    success:  boolean
+    page: number,
+    totalPages: number,
+    success:  boolean,
+    message: string,
 }
