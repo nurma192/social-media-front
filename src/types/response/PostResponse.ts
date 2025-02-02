@@ -1,14 +1,13 @@
-import type {PostWithAllInfo} from "../Post";
+import type {PostWithAllInfo, Post} from "../Post";
 
 export type GetAllPostsResponse = {
-    success: boolean,
-    page: number,
-    totalPages: number,
-    limit: number,
     posts: PostWithAllInfo[]
 }
 
-export type GetPostsResponse = {
-    success: boolean,
+export type GetPostResponse = {
     post: PostWithAllInfo
+}
+
+export type CreatePostResponse = {
+    post: Post
 }

@@ -2,7 +2,7 @@ import type {Image} from "./Image";
 import type {UserMainInfo} from "./User";
 
 export type Post = {
-    id: string,
+    id: number,
     user_id: string,
     content_text: string
     images: Image[]

@@ -51,7 +51,7 @@ const CreatePost = ({posts, setPosts}: Props) => {
 
             setPosts([
                 {
-                    id: data.post.id,
+                    id: data.result.post.id,
                     user: {
                         id: currentUser.id,
                         username: currentUser.username,
@@ -59,12 +59,12 @@ const CreatePost = ({posts, setPosts}: Props) => {
                         lastname: currentUser.lastname,
                         avatar_url: currentUser.avatar_url,
                     },
-                    content_text: data.post.content_text,
-                    liked_by_user: data.post.liked_by_user,
-                    likes_count: data.post.likes_count,
-                    comments_count: data.post.comments_count,
+                    content_text: data.result.post.content_text,
+                    liked_by_user: false,
+                    likes_count: 0,
+                    comments_count: 0,
                     images: imagePreviews.map((image, index) => ({id:index, url: image})),
-                    created_at: data.post.created_at,
+                    created_at: data.result.post.created_at,
                 },
                 ...posts
             ]);

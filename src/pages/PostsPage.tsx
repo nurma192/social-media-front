@@ -30,10 +30,10 @@ const Posts = () => {
                 if (req.isSuccess) {
                     setPosts([
                         ...posts,
-                        ...req.data.posts,
+                        ...req.data.result.result.posts,
                     ])
-                    setLoadedPages(req.data.page);
-                    setMaxPage(req.data.totalPages);
+                    setLoadedPages(req.data.result.page);
+                    setMaxPage(req.data.result.totalPages);
                 }
             })
             .finally(() => {

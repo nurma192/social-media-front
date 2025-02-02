@@ -5,9 +5,8 @@ import {useSendCodeMutation, useVerifyAccountMutation} from "../app/features/aut
 import type {VerifyAccountRequest} from "../types/request/authRequests";
 import ErrorMessage from "../components/ui/ErrorMessage";
 import type {AuthType} from "../pages/AuthPage";
-import {Controller, Form, SubmitHandler, useForm} from "react-hook-form";
+import {Controller, type SubmitHandler, useForm} from "react-hook-form";
 import {useEffect, useState} from "react";
-import {color} from "framer-motion";
 
 type Props = {
     email: string;
@@ -19,7 +18,11 @@ const VerifyAccount = ({email, setSelected}: Props) => {
 
 
     const [verifyAccount, {isLoading, isError, error}] = useVerifyAccountMutation()
-    const [sendVerifyAccount, {isLoading: isSendCodeLoading, isError: isSendCodeError, error :sendCodeError}] = useSendCodeMutation()
+    const [sendVerifyAccount, {
+        isLoading: isSendCodeLoading,
+        isError: isSendCodeError,
+        error: sendCodeError
+    }] = useSendCodeMutation()
     const {
         handleSubmit,
         control,
@@ -32,11 +35,10 @@ const VerifyAccount = ({email, setSelected}: Props) => {
     });
 
     const handleVerifyAccount: SubmitHandler<VerifyAccountRequest> = async (body) => {
-        const result = await verifyAccount(body).unwrap()
-        console.log(result)
-        if (result && result.success) {
-            setSelected("login")
-        }
+        await verifyAccount(body)
+            .then(() => {
+                setSelected("login")
+            })
     }
     const startTimer = () => {
         setIsButtonDisabled(true);
@@ -52,7 +54,7 @@ const VerifyAccount = ({email, setSelected}: Props) => {
         }, 1000);
     }
     const handleSendCode = async () => {
-        await sendVerifyAccount({ email });
+        await sendVerifyAccount({email});
         startTimer()
     };
 
@@ -66,7 +68,8 @@ const VerifyAccount = ({email, setSelected}: Props) => {
             <h1 className={`text-2xl font-bold`}>Enter verify code</h1>
             <p className={`text-neutral-500 text-sm`}>We sent to your email Verification code</p>
 
-            <form className="flex flex-col items-center gap-2 w-full max-w-[300px] mt-2" onSubmit={handleSubmit(handleVerifyAccount)}>
+            <form className="flex flex-col items-center gap-2 w-full max-w-[300px] mt-2"
+                  onSubmit={handleSubmit(handleVerifyAccount)}>
                 <div className="flex w-full justify-center">
                     <Controller
                         control={control}

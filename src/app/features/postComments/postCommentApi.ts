@@ -7,31 +7,32 @@ import type {
     UpdatePostComment
 } from "../../../types/request/PostCommentRequests";
 import type {GetPostCommentsResponse} from "../../../types/response/PostCommentResponse";
+import type {PaginationResponse, Response} from "../../../types/response/response";
 
 export const postCommentApi = api.injectEndpoints({
     endpoints: build => ({
-        createPostComment: build.mutation<DefaultResponse, CreatePostComment>({
+        createPostComment: build.mutation<Response<any>, CreatePostComment>({
             query: body => ({
                 url: `postComments`,
                 method: "POST",
                 body: body
             })
         }),
-        updatePostComment: build.mutation<DefaultResponse, UpdatePostComment>({
+        updatePostComment: build.mutation<Response<any>, UpdatePostComment>({
             query: body => ({
                 url: `postComments`,
                 method: "PUT",
                 body: body
             })
         }),
-        deletePostComment: build.mutation<DefaultResponse, DeletePostComment>({
+        deletePostComment: build.mutation<Response<any>, DeletePostComment>({
             query: body => ({
                 url: `postComments`,
                 method: "DELETE",
                 body: body
             })
         }),
-        getPostComments: build.query<GetPostCommentsResponse, GetPostCommentsRequest>({
+        getPostComments: build.query<Response<PaginationResponse<GetPostCommentsResponse>>, GetPostCommentsRequest>({
             query: body => ({
                 url: `postComments/${body.postId}`,
                 method: "GET"

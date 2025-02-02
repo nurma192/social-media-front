@@ -28,11 +28,11 @@ const Login = ({setSelected}: Props) => {
     const [triggerCurrentUser] = useLazyCurrentUserQuery()
 
     const onSubmit: SubmitHandler<LoginRequest> = async (body) => {
-        const result = await login(body)
-        if (result.data && result.data.success) {
-            await triggerCurrentUser()
-            navigate("/")
-        }
+        await login(body)
+            .then(() => {
+                triggerCurrentUser()
+                navigate("/")
+            })
     }
 
     return (

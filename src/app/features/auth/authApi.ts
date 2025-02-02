@@ -1,4 +1,4 @@
-import type {LoginResponse, RegisterResponse} from "../../../types/response/authResponses";
+import {LoginResponse, VerifyAccountResponse} from "../../../types/response/authResponses";
 import type {
     LoginRequest,
     RegisterRequest,
@@ -6,40 +6,40 @@ import type {
     VerifyAccountRequest
 } from "../../../types/request/authRequests";
 import {api} from "../../api";
-import type { DefaultResponse} from "../../../types/response/DefaultResponse";
+import type {Response} from "../../../types/response/response";
 
 
 export const authApi = api.injectEndpoints({
     endpoints: build => ({
-        login: build.mutation<LoginResponse, LoginRequest>({
+        login: build.mutation<Response<LoginResponse>, LoginRequest>({
             query: body => ({
                 url: "auth/login",
                 method: "POST",
                 body: body
             })
         }),
-        register: build.mutation<RegisterResponse, RegisterRequest>({
+        register: build.mutation<Response<any>, RegisterRequest>({
             query: body => ({
                 url: "auth/register",
                 method: "POST",
                 body: body
             })
         }),
-        sendCode: build.mutation<DefaultResponse, SendVerifyCodeRequest>({
+        sendCode: build.mutation<Response<any>, SendVerifyCodeRequest>({
             query: body => ({
                 url: "auth/send-verify-code",
                 method: "POST",
                 body: body
             })
         }),
-        verifyAccount: build.mutation<DefaultResponse, VerifyAccountRequest>({
+        verifyAccount: build.mutation<Response<VerifyAccountResponse>, VerifyAccountRequest>({
             query: body => ({
                 url: "auth/verify-account",
                 method: "POST",
                 body: body
             })
         }),
-        refreshToken: build.mutation<LoginResponse, void>({
+        refreshToken: build.mutation<Response<LoginResponse>, void>({
             query: () => ({
                 url: "auth/refresh-token",
                 method: "POST",

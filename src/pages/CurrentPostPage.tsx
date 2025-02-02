@@ -21,8 +21,8 @@ const CurrentPost = () => {
         <div className="flex flex-col gap-3">
             {isSuccess && (
                 <>
-                    <PostCard post={data.post}/>
-                    <PostComments postId={data.post.id}/>
+                    <PostCard post={data.result.post}/>
+                    <PostComments postId={data.result.post.id}/>
                 </>
             )}
         </div>

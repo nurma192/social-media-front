@@ -1,11 +1,12 @@
 import {api} from "../../api";
-import type {GetAllPostsResponse, GetPostsResponse} from "../../../types/response/PostResponse";
+import {CreatePostResponse, GetAllPostsResponse, GetPostResponse} from "../../../types/response/PostResponse";
 import type {CreatePostRequest, GetAllPostsRequest, UpdatePostRequest} from "../../../types/request/postRequest";
 import type {DefaultResponse} from "../../../types/response/DefaultResponse";
+import type {PaginationResponse,Response} from "../../../types/response/response";
 
 export const postApi = api.injectEndpoints({
         endpoints: build => ({
-            getAllPosts: build.query<GetAllPostsResponse, GetAllPostsRequest | void>({
+            getAllPosts: build.query<Response<PaginationResponse<GetAllPostsResponse>>, GetAllPostsRequest | void>({
                 query: body => {
                     const limit = body?.limit ?? 10
                     const page = body?.page ?? 1
@@ -16,14 +17,14 @@ export const postApi = api.injectEndpoints({
                     }
                 }
             }),
-            getPostById: build.query<GetPostsResponse, string>({
+            getPostById: build.query<Response<GetPostResponse>, string>({
                 query: body => ({
                     url: `posts/${body}`,
                     method: "GET",
                     // providesTags: () => [{type: 'Post', id: 'POST'}],
                 })
             }),
-            createPost: build.mutation<DefaultResponse, CreatePostRequest>({
+            createPost: build.mutation<Response<CreatePostResponse>, CreatePostRequest>({
                 query: body => {
                     const formData = new FormData();
                     formData.append("contentText", body.contentText);
@@ -39,13 +40,13 @@ export const postApi = api.injectEndpoints({
                     };
                 }
             }),
-            deletePost: build.mutation<DefaultResponse, string>({
+            deletePost: build.mutation<Response<any>, string>({
                 query: (postId) => ({
                     url: `/posts/${postId}`,
                     method: "DELETE"
                 })
             }),
-            updatePost: build.mutation<DefaultResponse, UpdatePostRequest>({
+            updatePost: build.mutation<Response<any>, UpdatePostRequest>({
                 query: (body) => {
                     const formData = new FormData();
                     formData.append("contentText", body.contentText);

@@ -7,8 +7,8 @@ loginMiddleware.startListening({
     matcher: authApi.endpoints.login.matchFulfilled,
     effect: async (action, listenerApi) => {
         listenerApi.cancelActiveListeners()
-        if (action.payload.token) {
-            localStorage.setItem("token", action.payload.token)
+        if (action.payload.result) {
+            localStorage.setItem("token", action.payload.result.token);
         }
     }
 })

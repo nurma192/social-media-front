@@ -1,21 +1,9 @@
 import type {User} from "../User";
 
 export type LoginResponse = {
-    success: boolean,
     token: string,
-    message: string,
-    detail: string
 }
 
-export type RegisterResponse = {
+export type VerifyAccountResponse = {
     user: User,
-    message : string,
-    success : string,
-}
-
-
-export type DefaultErrorResponse = {
-    message: string,
-    details: string,
-    success: string
 }

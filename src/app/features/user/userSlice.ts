@@ -45,16 +45,16 @@ const slice = createSlice({
     extraReducers: builder => (
         builder
             .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
-                state.token = action.payload.token
+                state.token = action.payload.result.token
                 state.isAuthenticated = true
             })
             .addMatcher(userApi.endpoints.currentUser.matchFulfilled, (state, action) => {
-                state.currentUser = action.payload.user
+                state.currentUser = action.payload.result.user
                 state.isAuthenticated = true
             })
             .addMatcher(authApi.endpoints.refreshToken.matchFulfilled, (state, action) => {
-                localStorage.setItem("token", action.payload.token)
-                state.token = action.payload.token
+                localStorage.setItem("token", action.payload.result.token)
+                state.token = action.payload.result.token
                 state.isAuthenticated = true
             })
             // .addMatcher(userApi.endpoints.getUserByID.matchFulfilled, (state, action) => {

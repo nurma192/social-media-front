@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {useGetPostCommentsQuery, useLazyGetPostCommentsQuery} from "../app/features/postComments/postCommentApi";
-import { Card } from '@nextui-org/react';
+import {useEffect, useState} from 'react';
+import {useLazyGetPostCommentsQuery} from "../app/features/postComments/postCommentApi";
+import {Card} from '@nextui-org/react';
 import MyCircularProgress from "./ui/MyCircularProgress";
 import type {CommentWithUser} from "../types/Comment";
 import CommentCard from "./CommentCard";
@@ -21,10 +21,10 @@ function PostComments({postId}: Props) {
     console.log("comments", comments)
 
     useEffect(() => {
-        if (!fetching){
+        if (!fetching) {
             return
         }
-        if(maxPage <= page) {
+        if (maxPage <= page) {
             setFetching(false);
             return;
         }
@@ -32,13 +32,13 @@ function PostComments({postId}: Props) {
             .then(req => {
                 console.log(req)
                 if (req.isSuccess) {
-                    const newComments = req.data.comments || [];
+                    const newComments = req.data.result.result.comments || [];
                     setComments([
                         ...comments,
                         ...newComments,
                     ])
-                    setPage(req.data.page)
-                    setMaxPage(req.data.totalPages)
+                    setPage(req.data.result.page)
+                    setMaxPage(req.data.result.totalPages)
                 }
             })
             .finally(() => {
@@ -66,12 +66,12 @@ function PostComments({postId}: Props) {
     }
 
     return (
-     <Card className={`w-full rounded-md p-4 flex flex-col gap-2`}>
-         {comments.map(comment => (
-             <CommentCard comment={comment} key={comment.id} />
-         ))}
-         {isLoading && <MyCircularProgress size={"md"} />}
-     </Card>
+        <Card className={`w-full rounded-md p-4 flex flex-col gap-2`}>
+            {comments.map(comment => (
+                <CommentCard comment={comment} key={comment.id}/>
+            ))}
+            {isLoading && <MyCircularProgress size={"md"}/>}
+        </Card>
     );
 }
 

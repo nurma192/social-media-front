@@ -24,13 +24,11 @@ const Register = ({setSelected}: Props) => {
     const [register, {isLoading, isError, error}] = useRegisterMutation()
 
     const onSubmit: SubmitHandler<RegisterRequest> = async (body) => {
-        console.log(body)
-        const result = await register(body)
-        console.log(result)
-        if (result.data && result.data.success) {
-            setEmail(body.email)
-            setRegisterState("verify")
-        }
+        await register(body)
+            .then(() => {
+                setEmail(body.email)
+                setRegisterState("verify")
+            })
     }
 
     if (registerState === "verify" && email) {
@@ -39,7 +37,7 @@ const Register = ({setSelected}: Props) => {
         )
     }
 
-    if (registerState === "register"){
+    if (registerState === "register") {
         return (
             <form action="" className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
                 <MyInput
