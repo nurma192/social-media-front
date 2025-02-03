@@ -8,7 +8,7 @@ type Props = {
 
 function CommentCard({comment}: Props): JSX.Element {
     return (
-        <Card className={`w-full rounded-md p-4 flex flex-row`}>
+        <Card className={`border-none shadow-none w-full rounded-md p-4 flex flex-row`}>
             <div className="">
                 <Avatar src={comment.user.avatar_url} name={comment.user.id}/>
             </div>

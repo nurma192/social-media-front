@@ -2,13 +2,13 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useGetPostByIdQuery} from "../app/features/post/postApi";
 import PostCard from "../components/PostCard";
 import PostComments from "../components/PostComments";
+import CreatePostComment from "../features/CreatePostComment";
 
 const CurrentPost = () => {
     const navigate = useNavigate()
     const {id} = useParams();
     const {data, isError, isSuccess} = useGetPostByIdQuery(id!);
 
-    console.log(data)
     if (!id) {
         navigate("/posts");
     }

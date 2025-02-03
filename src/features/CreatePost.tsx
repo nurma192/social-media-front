@@ -1,11 +1,11 @@
 import {useCreatePostMutation} from "../app/features/post/postApi";
 import {type SubmitHandler, useForm} from "react-hook-form";
-import MyTextarea from "./ui/MyTextarea";
-import MyButton from "./ui/MyButton";
+import MyTextarea from "../components/ui/MyTextarea";
+import MyButton from "../components/ui/MyButton";
 import {IoSendSharp} from "react-icons/io5";
 import {useEffect, useState} from "react";
-import ImageSlider from "./ImageSlider";
-import MyCircularProgress from "./ui/MyCircularProgress";
+import ImageSlider from "../components/ImageSlider";
+import MyCircularProgress from "../components/ui/MyCircularProgress";
 import {type Image} from "../types/Image";
 import {type PostWithAllInfo} from "../types/Post";
 import {useAppSelector} from "../app/hooks";

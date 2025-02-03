@@ -1,5 +1,5 @@
 import {useLazyGetAllPostsQuery} from "../app/features/post/postApi";
-import CreatePost from "../components/createPost";
+import CreatePost from "../features/CreatePost";
 import PostCard from "../components/PostCard";
 import {Skeleton, Card} from "@nextui-org/react";
 import {useEffect, useState} from "react";

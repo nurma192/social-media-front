@@ -16,9 +16,11 @@ type Props = {
     minLength?: number;
     minLengthErrorMessage?: string;
     endContent?: JSX.Element;
+    className?: string;
+    classNames?: any;
 }
 
-const MyInput = ({name, label, placeholder, type, control, required, patternValue, patternErrorMessage = 'Invalid pattern', maxLength, maxLengthErrorMessage = 'Input text exceeds limit', minLength, minLengthErrorMessage='Input the text does`t reach the desired size', endContent, ...props}: Props) => {
+const MyInput = ({className, classNames, name, label, placeholder, type, control, required, patternValue, patternErrorMessage = 'Invalid pattern', maxLength, maxLengthErrorMessage = 'Input text exceeds limit', minLength, minLengthErrorMessage='Input the text does`t reach the desired size', endContent, ...props}: Props) => {
     const [rules, setRules] = useState({});
 
     useEffect(()=> {
@@ -76,6 +78,9 @@ const MyInput = ({name, label, placeholder, type, control, required, patternValu
             onChange={field.onChange}
             onBlur={field.onBlur}
             errorMessage={`${errors[name]?.message ?? ''}`}
+            endContent={endContent}
+            className={className}
+            classNames={classNames}
             {...props}
         />
     );
