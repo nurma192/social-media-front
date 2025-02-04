@@ -5,6 +5,7 @@ import MyCircularProgress from "./ui/MyCircularProgress";
 import type {CommentWithUser} from "../types/Comment";
 import CommentCard from "./CommentCard";
 import CreatePostComment from "../features/CreatePostComment";
+import {FaAnglesDown} from 'react-icons/fa6';
 
 type Props = {
     postId: number
@@ -16,7 +17,7 @@ function PostComments({postId}: Props) {
     const [maxPage, setMaxPage] = useState(1);
     const [fetching, setFetching] = useState(true);
 
-    const [getPostComments, {data, isError, isLoading}] = useLazyGetPostCommentsQuery()
+    const [getPostComments, {isLoading}] = useLazyGetPostCommentsQuery()
 
 
     useEffect(() => {
@@ -27,7 +28,10 @@ function PostComments({postId}: Props) {
             setFetching(false);
             return;
         }
-        getPostComments({postId})
+        getPostComments({
+            postId: postId,
+            page: page + 1,
+        })
             .then(req => {
                 if (req.isSuccess) {
                     const newComments = req.data.result.result.comments || [];
@@ -44,27 +48,20 @@ function PostComments({postId}: Props) {
             })
     }, [fetching]);
 
-    useEffect(() => {
-        // document.addEventListener('scroll', handleScroll);
-        //
-        // return () => {
-        //     document.removeEventListener('scroll', handleScroll);
-        // }
-    }, []);
-
-    const handleScroll = (e: Event) => {
-        const target = e.target as Document;
-        if (target.documentElement.scrollHeight - (target.documentElement.scrollTop + window.innerHeight) < 100) {
-            setFetching(true)
-        }
-    }
-
     return (
         <Card className={`w-full rounded-md p-2 flex flex-col gap-2`}>
-            <CreatePostComment postId={postId} comments={comments} setComments={setComments} />
+            <CreatePostComment postId={postId} comments={comments} setComments={setComments}/>
             {comments.length > 0 && comments.map(comment => (
                 <CommentCard comment={comment} key={comment.id}/>
             ))}
+            {!isLoading && maxPage > page && <div className={"w-full flex justify-center"}>
+				<div
+					className="p-1 cursor-pointer group hover:scale-110 rounded-full flex justify-center items-center border"
+					onClick={() => setFetching(true)}
+				>
+					<FaAnglesDown className={'group-hover:scale-85 transition'}/>
+				</div>
+			</div>}
             {isLoading && <MyCircularProgress size={"md"}/>}
         </Card>
     );

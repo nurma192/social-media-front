@@ -13,6 +13,8 @@ export type UpdatePostComment = {
 }
 
 export type GetPostCommentsRequest = {
-    postId: number
+    postId: number,
+    page?: number,
+    limit?: number,
 }
 

@@ -2,9 +2,9 @@ import {Card, Avatar} from "@nextui-org/react";
 import {Link, useNavigate, useLocation} from "react-router-dom";
 import {type PostWithAllInfo} from "../types/Post";
 import ImageSlider from "./ImageSlider";
-import { GoHeartFill } from "react-icons/go";
-import { FaRegCommentDots } from "react-icons/fa";
-import {useEffect, useState} from "react";
+import {GoHeartFill} from "react-icons/go";
+import {FaRegCommentDots} from "react-icons/fa";
+import {useState} from "react";
 import {useLikePostMutation, useUnlikePostMutation} from "../app/features/like/likeApi";
 
 type Props = {

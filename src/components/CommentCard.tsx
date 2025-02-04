@@ -1,4 +1,3 @@
-import React from 'react';
 import type {CommentWithUser} from "../types/Comment";
 import {Avatar, Card } from '@nextui-org/react';
 

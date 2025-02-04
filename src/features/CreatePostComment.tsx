@@ -1,7 +1,7 @@
 import {type SubmitHandler, useForm} from 'react-hook-form';
 import MyInput from "../components/ui/MyInput";
 import {IoSendSharp} from "react-icons/io5";
-import {useCreatePostCommentMutation, useLazyGetPostCommentsQuery} from "../app/features/postComments/postCommentApi";
+import {useCreatePostCommentMutation} from "../app/features/postComments/postCommentApi";
 import MyCircularProgress from "../components/ui/MyCircularProgress";
 import type {CommentWithUser} from "../types/Comment";
 import {useAppSelector} from "../app/hooks";

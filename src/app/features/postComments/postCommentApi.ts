@@ -5,7 +5,7 @@ import type {
     GetPostCommentsRequest,
     UpdatePostComment
 } from "../../../types/request/PostCommentRequests";
-import {CreatePostCommentResponse, GetPostCommentsResponse} from "../../../types/response/PostCommentResponse";
+import type {CreatePostCommentResponse, GetPostCommentsResponse} from "../../../types/response/PostCommentResponse";
 import type {PaginationResponse, Response} from "../../../types/response/response";
 
 export const postCommentApi = api.injectEndpoints({
@@ -32,10 +32,14 @@ export const postCommentApi = api.injectEndpoints({
             })
         }),
         getPostComments: build.query<Response<PaginationResponse<GetPostCommentsResponse>>, GetPostCommentsRequest>({
-            query: body => ({
-                url: `postComments/${body.postId}`,
-                method: "GET"
-            })
+            query: body => {
+                const limit = body.limit || 10;
+                const page = body.page || 1;
+                return {
+                    url: `postComments/${body.postId}?page=${page}&limit=${limit}`,
+                    method: "GET"
+                }
+            }
         })
     })
 })
