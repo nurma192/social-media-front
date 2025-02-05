@@ -6,6 +6,7 @@ import {GoHeartFill} from "react-icons/go";
 import {FaRegCommentDots} from "react-icons/fa";
 import {useState} from "react";
 import {useLikePostMutation, useUnlikePostMutation} from "../app/features/like/likeApi";
+import {formatTimeAgo} from "../utils/getData";
 
 type Props = {
     post: PostWithAllInfo,
@@ -46,9 +47,12 @@ function PostCard({post}: Props) {
 
     return (
         <Card className="flex flex-col items-start gap-3 p-3 rounded-md">
-            <Link to={`user/${post.user.id}`} className={`flex gap-2 items-center justify-start `}>
+            <Link to={`users/${post.user.id}`} className={`flex gap-2 items-center justify-start `}>
                 <Avatar src={post.user.avatar_url} name={post.user.id}/>
-                <h2 className={`font-bold`}>{post.user.username} {post.id}</h2>
+                <div className="flex flex-col">
+                    <h2 className={`font-bold`}>{post.user.username} {post.id}</h2>
+                    <p className={`text-sm opacity-80`}>{formatTimeAgo(post.created_at)}</p>
+                </div>
             </Link>
             <ImageSlider images={post.images}/>
             <p className={"text-md"}>{post.content_text}</p>

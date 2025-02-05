@@ -22,7 +22,7 @@ const Profile = () => {
                 />
             </CardHeader>
             <CardBody className="px-4">
-                <Link to={`user/${id}`}>
+                <Link to={`users/${id}`}>
                     <h4 className="font-bold text-large mb-2">{`${firstname} ${lastname} (@${username})`} </h4>
                     <p className="text-default flex items-center gap-2">
                         <span>{email}</span>
