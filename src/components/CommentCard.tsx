@@ -15,7 +15,7 @@ function CommentCard({comment}: Props): JSX.Element {
             <div className="flex flex-col ml-3">
                 <div className="flex items-center gap-2">
                     <p className={`text-base font-bold`}>{comment.user.firstname} {comment.user.lastname}</p>
-                    <p className={`text-sm opacity-80`}>{formatTimeAgo(comment.created_at)}</p>
+                    <p className={`text-sm opacity-80`}>{formatTimeAgo(comment.createdAt)}</p>
                 </div>
                 <p className={`text-sm`}>{comment.content}</p>
             </div>

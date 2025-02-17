@@ -1,4 +1,4 @@
-import {LoginResponse, VerifyAccountResponse} from "../../../types/response/authResponses";
+import type {LoginResponse, VerifyAccountResponse} from "../../../types/response/authResponses";
 import type {
     LoginRequest,
     RegisterRequest,

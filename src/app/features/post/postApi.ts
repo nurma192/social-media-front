@@ -1,5 +1,5 @@
 import {api} from "../../api";
-import {CreatePostResponse, GetAllPostsResponse, GetPostResponse} from "../../../types/response/PostResponse";
+import type {CreatePostResponse, GetAllPostsResponse, GetPostResponse} from "../../../types/response/PostResponse";
 import type {CreatePostRequest, GetAllPostsRequest, UpdatePostRequest} from "../../../types/request/postRequest";
 import type {DefaultResponse} from "../../../types/response/DefaultResponse";
 import type {PaginationResponse,Response} from "../../../types/response/response";

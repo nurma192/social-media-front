@@ -36,6 +36,7 @@ function CreatePostComment({postId, comments, setComments}: Props) {
                         {
                             id: res.data?.result.comment.id || -1,
                             content: res.data?.result.comment.content || "",
+                            postId: postId,
                             user: {
                                 id: user.id,
                                 username: user.username,
@@ -43,7 +44,7 @@ function CreatePostComment({postId, comments, setComments}: Props) {
                                 lastname: user.lastname,
                                 avatar_url: user.avatar_url,
                             },
-                            created_at: res.data?.result.comment.created_at || "",
+                            createdAt: res.data?.result.comment.createdAt || "",
                         },
                         ...comments
                     ]

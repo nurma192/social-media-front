@@ -2,7 +2,6 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useGetPostByIdQuery} from "../app/features/post/postApi";
 import PostCard from "../components/PostCard";
 import PostComments from "../components/PostComments";
-import CreatePostComment from "../features/CreatePostComment";
 
 const CurrentPost = () => {
     const navigate = useNavigate()

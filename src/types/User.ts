@@ -4,12 +4,12 @@ export type User = {
     email: string;
     firstname: string;
     lastname: string;
-    avatar_url?: string;
-    date_of_birth?: string
+    avatarUrl?: string;
+    dateOfBirth?: string
     bio?: string
     verified?: string
     location?: string
-    created_at?: string
+    createdAt?: string
 }
 
 export type UserMainInfo = {
@@ -17,5 +17,5 @@ export type UserMainInfo = {
     username: string;
     firstname: string;
     lastname: string;
-    avatar_url?: string;
+    avatarUrl?: string;
 }

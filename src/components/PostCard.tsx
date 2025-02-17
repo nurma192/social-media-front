@@ -13,8 +13,8 @@ type Props = {
 }
 
 function PostCard({post}: Props) {
-    const [liked, setLiked] = useState(post.liked_by_user);
-    const [likeCount, setLikeCount] = useState(post.likes_count)
+    const [liked, setLiked] = useState(post.likedByUser);
+    const [likeCount, setLikeCount] = useState(post.likesCount)
     const navigate = useNavigate()
     const location = useLocation();
 
@@ -48,14 +48,14 @@ function PostCard({post}: Props) {
     return (
         <Card className="flex flex-col items-start gap-3 p-3 rounded-md">
             <Link to={`users/${post.user.id}`} className={`flex gap-2 items-center justify-start `}>
-                <Avatar src={post.user.avatar_url} name={post.user.id}/>
+                <Avatar src={post.user.avatarUrl} name={post.user.id}/>
                 <div className="flex flex-col">
-                    <h2 className={`font-bold`}>{post.user.username} {post.id}</h2>
-                    <p className={`text-sm opacity-80`}>{formatTimeAgo(post.created_at)}</p>
+                    <h2 className={`font-bold`}>{post.user.username}</h2>
+                    <p className={`text-sm opacity-80`}>{formatTimeAgo(post.createdAt)}</p>
                 </div>
             </Link>
             <ImageSlider images={post.images}/>
-            <p className={"text-md"}>{post.content_text}</p>
+            <p className={"text-md"}>{post.contentText}</p>
             <div className="flex gap-2">
                 <button onClick={handleOnLikeClick} className={`flex gap-2 items-center rounded-2xl py-2 px-3 group transition border border-neutral-500 dark:hover:bg-black  bg-opacity-40 ${liked ? 'bg-red-700' : ''}`}>
                     <GoHeartFill className={`w-5 h-5 transition group-hover:scale-110 text-neutral-500 ${liked ? 'text-red-500' : ''}`}/>
@@ -63,7 +63,7 @@ function PostCard({post}: Props) {
                 </button>
                 <button onClick={handleOnCommentClick} className={`flex gap-2 items-center rounded-2xl py-2 px-3 group transition border border-neutral-500 dark:hover:bg-black bg-opacity-40 `}>
                     <FaRegCommentDots className={`w-5 h-5 transition group-hover:scale-110 text-neutral-500`}/>
-                    {post.comments_count}
+                    {post.commentsCount}
                 </button>
             </div>
         </Card>
