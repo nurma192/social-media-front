@@ -6,7 +6,6 @@ import {store} from "./app/store"
 import "./index.css"
 import {NextUIProvider} from "@nextui-org/react";
 import {ThemeProvider} from "./components/vim-provider";
-import {   } from '@nextui-org/react';
 
 
 const container = document.getElementById("root")

@@ -1,5 +1,5 @@
 import {api} from "../../api";
-import type {CurrentUserResponse} from "../../../types/response/userResponse";
+import type {CurrentUserResponse, GetUserResponse} from "../../../types/response/userResponse";
 import type {Response} from "../../../types/response/response";
 
 export const userApi = api.injectEndpoints({
@@ -9,11 +9,19 @@ export const userApi = api.injectEndpoints({
                 url: "user/current",
                 method: "GET",
             })
+        }),
+        getUserById: build.query<Response<GetUserResponse>, number>({
+            query: userId => ({
+                url: `user/${userId}`,
+                method: "GET",
+            })
         })
     })
 })
 
 export const {
     useLazyCurrentUserQuery,
-    useCurrentUserQuery
+    useCurrentUserQuery,
+    useGetUserByIdQuery,
+    useLazyGetUserByIdQuery
 } = userApi

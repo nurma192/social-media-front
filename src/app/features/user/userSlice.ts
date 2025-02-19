@@ -57,9 +57,9 @@ const slice = createSlice({
                 state.token = action.payload.result.token
                 state.isAuthenticated = true
             })
-            // .addMatcher(userApi.endpoints.getUserByID.matchFulfilled, (state, action) => {
-            //     state.user = action.payload
-            // })
+            .addMatcher(userApi.endpoints.getUserById.matchFulfilled, (state, action) => {
+                state.user = action.payload.result.user
+            })
     )
 })
 
